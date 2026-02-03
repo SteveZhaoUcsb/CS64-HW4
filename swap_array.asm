@@ -195,25 +195,29 @@ doSwap:
         # }
 
         # TODO: fill in the assembly code here:
-        li $t0, 0
-        li $t1, 1
-        li $t2, 11
-        while:
-        bge $t0, $t2, done
-        sll $t3, $t0, 2
-        addu $t3,$a0,$t3
+        la   $t7, myArray      
+        li   $t0, 0            # x = 0
+        li   $t1, 1            # y = 1
+        li   $t2, 11           # limit = 11
 
-        sll $t4,$t1,2
-        addu $t4,$a0,$t4
+while:
+        slt  $t3, $t0, $t2    
+        beq  $t3, $zero, finished
 
-        lw   $t5, 0($t3)        
-        lw   $t6, 0($t4)        
-        sw   $t6, 0($t3)        # arr[x] = valY
-        sw   $t5, 0($t4)        # arr[y] = temp
+        sll  $t4, $t0, 2       # t4 = x*4
+        addu $t4, $t7, $t4     # t4 = &myArray[x]
 
-        addi $t0, $t0, 2       
-        addi $t1, $t1, 2        
-        j while
+        sll  $t5, $t1, 2       # t5 = y*4
+        addu $t5, $t7, $t5     # t5 = &myArray[y]
+
+        lw   $t6, 0($t4)
+        lw   $t3, 0($t5)
+        sw   $t3, 0($t4)
+        sw   $t6, 0($t5)
+
+        addi $t0, $t0, 2
+        addi $t1, $t1, 2
+        j    while
 
                 
 
