@@ -80,9 +80,9 @@ ble $t0,$t7,exit
     # while loop:
 loop:    
     bge $t3,$t0,while
-    add $t4,$t1,$t2
-    add $t1, $zero, $t2
-    add $t2, $zero, $t4
+    addu $t4,$t1,$t2
+    addu $t1, $zero, $t2
+    addu $t2, $zero, $t4
 
     li $v0,4
     la $a0,spacech
